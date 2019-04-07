@@ -41,7 +41,7 @@ exports.convertExchange = async (req, reply) => {
 
 exports.getExchanges = async (req, reply) => {
   try {
-    const exchange = await Exchange.find();
+    const exchange = await Exchange.find({}, {symbol: 1, rate: 1 , _id: 0});
     return exchange;
   } catch (err) {
     throw boom.boomify(err);
@@ -51,7 +51,7 @@ exports.getExchanges = async (req, reply) => {
 exports.getSingleExchange = async (req, reply) => {
   try {
     const id = req.params.id;
-    const exchange = await Exchange.findById(id);
+    const exchange = await Exchange.findById(id, {symbol: 1, rate: 1 , _id: 0});
     return exchange;
   } catch (err) {
     throw boom.boomify(err);
