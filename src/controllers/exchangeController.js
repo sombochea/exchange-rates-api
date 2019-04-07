@@ -40,7 +40,7 @@ exports.convertExchange = async (req, reply) => {
 };
 
 exports.emptyReq = async(req, reply) => {
-  return 0;
+  return true;
 }
 
 exports.getExchanges = async (req, reply) => {
