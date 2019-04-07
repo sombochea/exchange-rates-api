@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>SIMPLE CURRENCY CONVERTER</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        html {
+            font-size: 20px;
+        }
+        .results {
+            font-size: 1em;
+        }
+        .dropdown {
+            margin-bottom: 50px;
+        }
+        .inline-block {
+            display: inline-block;
+        }
+        .center {
+            width: 90%;
+            margin: 0 auto 30px;
+        }
+        .error {
+            background-color:crimson;
+            padding: 10px;
+            color: white;
+            display: none;
+        }
+    </style>
+
+</head>
+<body>
+
+    <div class="d-flex justify-content-center">
+        <div class="row">
+            <div class="col-md-12 p-5">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <h4 class="mt-2"><b>SIMPLE CURRENCY CONVERTER</b></h4>
+                    </div>
+                    <div class="alert alert-danger error mt-3" role="alert">
+                        Please enter numeric value
+                    </div>
+                    <div class="card-body">
+                        <form class="form-vertical" action="#" onsubmit="exchangeCurrency()">
+                            <div class="form-group center">
+                                <label for="first_val"><b>Enter Value</b></label>
+                                <input type="number" class="amount form-control" id="first_val" placeholder="Enter value" min="1" onchange="exchangeCurrency()">
+                            </div>
+                            <div class="form-group inline-block">
+                                <label for=""><b>From currency</b></label>
+                                <select class="currency-list from-currency form-control" id="from_curr" onclick="exchangeCurrency()">
+                                    <option>--Choose one--</option>
+                                </select>
+                            </div>
+                            <div class="form-group inline-block">
+                                <label for="to_curr"><b>To currency</b></label>
+                                <select class="currency-list to-currency form-control" id="to_curr" onclick="exchangeCurrency()">
+                                    <option>--Choose one--</option>
+                                </select>
+                            </div>
+                        </form>
+                        <b><p class="results">0</p></b>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $.getJSON("/api/exchanges", function (data) {
+            var currencies = [];
+            $.each(data, function (index, currency) {
+                currencies.push("<option value='" + currency.rate + "' >" + currency.symbol + "</option>");
+            });
+            $(".currency-list").append(currencies);
+        })
+
+        function exchangeCurrency() {
+            var amount = $(".amount").val();
+            var rateFrom = $(".from-currency").val();
+            var rateTo = $(".to-currency").val();
+            var rateToSymbol = $(".to-currency option:selected").text();
+            
+            if ((amount - 0) != amount || ('' + amount).trim().length == 0) {
+                $(".results").html("0");
+                $(".error").show()
+            } else {
+                $(".error").hide()
+                if (amount == undefined || rateFrom == "--Choose one--" || rateTo == "--Choose one--") {
+                    $(".results").html("0");
+                } else {
+                    $(".results").html((amount * (rateTo * (1 / rateFrom))).toFixed(4) + ' ' + rateToSymbol);
+                }
+            }
+        }
+    </script>
+
+</body>
+
+</html>

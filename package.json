@@ -1,0 +1,27 @@
+{
+  "name": "exchange-rates-api",
+  "version": "1.0.0",
+  "description": "Exchange Rates API for CUBETIQ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/nodemon/bin/nodemon.js ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/CUBETIQ/exchange-rates-api.git"
+  },
+  "author": "Sambo Chea",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/CUBETIQ/exchange-rates-api/issues"
+  },
+  "homepage": "https://gitlab.com/CUBETIQ/exchange-rates-api#readme",
+  "dependencies": {
+    "boom": "^7.3.0",
+    "fastify": "^2.2.0",
+    "fastify-static": "^2.4.0",
+    "mongoose": "^5.4.22",
+    "nodemon": "^1.18.10"
+  }
+}
