@@ -2,11 +2,6 @@ const exchangeController = require("../controllers/exchangeController");
 
 const routes = [
   {
-    method: "OPTIONS",
-    url: "/api/exchanges",
-    handler: exchangeController.emptyReq
-  },
-  {
     method: "GET",
     url: "/api/exchange/:from/:to/:amount",
     handler: exchangeController.convertExchange

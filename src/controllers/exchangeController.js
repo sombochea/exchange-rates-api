@@ -39,10 +39,6 @@ exports.convertExchange = async (req, reply) => {
   }
 };
 
-exports.emptyReq = async(req, reply) => {
-  return true;
-}
-
 exports.getExchanges = async (req, reply) => {
   try {
     const exchange = await Exchange.find();

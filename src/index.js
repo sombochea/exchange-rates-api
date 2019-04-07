@@ -10,8 +10,11 @@ const routes = require("./routes");
 const fastify = require("fastify")({
   logger: true
 });
+
 const fastifyStatic = require('fastify-static')
 const path = require('path')
+
+fastify.register(require('fastify-cors'), { origin: '*' });
 
 fastify.register(fastifyStatic, {
   root: path.join(__dirname, '../', 'public'),
