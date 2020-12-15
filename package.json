@@ -19,7 +19,7 @@
   "homepage": "https://gitlab.com/CUBETIQ/exchange-rates-api#readme",
   "dependencies": {
     "boom": "^7.3.0",
-    "fastify": "^2.2.0",
+    "fastify": "^2.15.1",
     "fastify-cors": "^2.1.2",
     "fastify-static": "^2.4.0",
     "mongoose": "^5.4.22",
